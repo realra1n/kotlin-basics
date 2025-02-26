@@ -8,8 +8,14 @@
 plugins {
     // plugin for spring boot applications, provides features like packaging application as executable Jars or Wars.
     id("org.springframework.boot") version "3.0.3"
+
+    // managing dependencies in spring-based project, it provides a way to handle versioning and resolving transitive dependencies. 
     id("io.spring.dependency-management") version "1.1.0"
+
+    // adds kotlin support for compiling Kotlin code to JVM bytecode. 
 	kotlin("jvm") version "1.7.22"
+
+    // add support for kotlin in spring projects allowing integration between kotin and spring-specific functionality like dependency injection.
 	kotlin("plugin.spring") version "1.7.22"
 
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
@@ -25,6 +31,17 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // add kotlin reflection support, required for using features like `data` classes and annotations. 
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    // include kotlin standard libaray that is compatible with JDK8. 
+	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+
     // Use the Kotlin JUnit 5 integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
@@ -46,7 +63,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.AppKt"
+    mainClass = "dev.real.ChatKotlinApplication"
 }
 
 tasks.named<Test>("test") {
